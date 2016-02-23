@@ -1,28 +1,22 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
+#########
+#DJANGO##
+#########
 
-# C extensions
-*.so
+# Taken from https://github.com/django/django/blob/master/.gitignore
 
-# Distribution / packaging
-.Python
-env/
-build/
-develop-eggs/
+*.egg-info
+*.pot
+*.py[co]
+__pycache__
+MANIFEST
 dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+docs/_build/
+docs/locale/
+node_modules/
+tests/coverage_html/
+tests/.coverage
+build/
+tests/report/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -60,3 +54,35 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#########
+#PYCHARM#
+#########
+
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+
+# Sensitive or high-churn files:
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+# Gradle:
+.idea/gradle.xml
+.idea/libraries
+
+# Mongo Explorer plugin:
+.idea/mongoSettings.xml
+
+## File-based project format:
+*.iws
+
