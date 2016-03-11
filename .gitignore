@@ -53,6 +53,12 @@ target/
 .ipynb_checkpoints
 
 #########
+##VENV###
+#########
+
+.venv/
+
+#########
 #PYCHARM#
 #########
 
