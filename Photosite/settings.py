@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@b&3x79n&+=@b#$&s8%nu+@p+zf1^ai($h3dn2(u1$i4gjei#('
+SECRET_KEY = 'mzzus-d9+bt!i77au!&-)d++a^%goyn47)()ujek955yvt4f5&'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -55,8 +55,7 @@ ROOT_URLCONF = 'Photosite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,8 +76,12 @@ WSGI_APPLICATION = 'Photosite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'photosite_db',
+        'USER': 'site_admin',
+        'PASSWORD': 'photosite99',
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
