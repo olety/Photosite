@@ -18,7 +18,3 @@ def register(request):
 
 def login(request):
     return HttpResponse("LOGIN")
-
-
-def feed(request):
-    return HttpResponse("HOME PAGE")
