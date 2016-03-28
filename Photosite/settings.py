@@ -134,5 +134,7 @@ STATICFILES_DIRS = [
 ]
 
 # Custom user
-
 AUTH_USER_MODEL = 'users.User'
+
+# Login redirect url
+LOGIN_REDIRECT_URL = '/'

@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from decimal import Decimal
 
+
 class Camera (models.Model):
 
     id = models.AutoField(primary_key=True)
@@ -43,6 +44,7 @@ class User (AbstractUser):
         blank=True,
     )
 
+    # Photos app will modify it
     view_count = models.DecimalField(
         verbose_name="Total number of views",
         name="view_count",
@@ -51,6 +53,7 @@ class User (AbstractUser):
         default=Decimal(0),
     )
 
+    # Photos app will modify it
     fav_count = models.DecimalField(
         verbose_name="Total number of favorites",
         name="fav_count",

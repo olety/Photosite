@@ -16,15 +16,27 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf.urls import include
 from django.contrib import admin
-from users import views as userviews
+from django.contrib.auth import views as django_views
+from photos import views as photo_views
+from users import views as user_views
 
 urlpatterns = [
-    # /admin/
-    url(r'^admin/', admin.site.urls),
+    url('^', include('django.contrib.auth.urls')),
+    # PHOTOS
+    #  /
+    url(r'^$', photo_views.home, name='photos_home'),
+    # USERS
     # /user/
     url(r'^user/', include('users.urls')),
     # /login
-    url(r'^login', userviews.login),
+    url(r'^login', user_views.login, name='users_login'),
+    # /logout
+    url(r'^logout', user_views.logout, name='users_logout'),
     # /register
-    url(r'^register', userviews.register),
+    url(r'^register', user_views.register, name='users_register'),
+    # /reset
+    url(r'^reset/$', user_views.password_reset, name='users_password_reset'),
+    # /admin/
+    url(r'^admin/', include(admin.site.urls)),
+
 ]

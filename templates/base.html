@@ -1,0 +1,58 @@
+{% load staticfiles %}
+{# Context needed : user #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block css %}
+        <link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
+        <link rel="stylesheet" href="{% static "css/base.css" %}" />
+    {% endblock %}
+    {% block js %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script src="{% static "js/bootstrap.min.js" %}"></script>
+    {% endblock %}
+    <title>{% block title %}Title{% endblock %}</title>
+</head>
+<body>
+{% block menu %}
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">Photosite</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                {% block menu_left %}
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    </ul>
+                {% endblock %}
+                {% block menu_right %}
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if user.is_authenticated %}
+                            <li><a href="{% url 'users_profile' user.id %}"><span class="glyphicon glyphicon-user"></span> {{ user.username|capfirst }}</a></li>
+                            <li><a href="{% url 'users_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                        {% else %}
+                            <li><a href="{% url 'users_register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                            <li><a href="{% url 'users_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                        {% endif %}
+                    </ul>
+                {% endblock %}
+            </div>
+        </div>
+    </nav>
+{% endblock %}
+{% block body %}
+    {% block sidebar %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+{% endblock %}
+</body>
+</html>
