@@ -1,4 +1,2 @@
-#Packages: 
-
-* django==1.9.4
-* psycopg2==2.6.1
+django==1.9.4
+psycopg2==2.6.1

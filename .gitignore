@@ -18,6 +18,7 @@ tests/.coverage
 build/
 tests/report/
 photosite_env/
+venv/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
