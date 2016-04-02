@@ -3,10 +3,16 @@ from django.db import models
 from users.models import User
 import os
 import binascii
+from datetime import datetime
 
 
 def photo_upload_path(instance, filename):
-    return 'photos/%Y/%m/{0}'.format(binascii.hexlify(os.urandom(16)))
+    date = datetime.now()
+    return 'photos/{1}/{2}/{0}'.format(
+        binascii.hexlify(os.urandom(16)),
+        date.strftime('%Y'),
+        date.strftime('%m')
+    )
 
 
 class Photo (models.Model):

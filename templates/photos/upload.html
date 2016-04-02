@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for error in form.errors %}
+                            <li>{{ error|escape }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <form method="post" action="{% url 'photos_upload' %}" enctype="multipart/form-data">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            {{ form.image.label_tag }}
+                            <input type="file" id="{{ form.image.auto_id }}" name="{{ form.image.html_name }}">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="{{ form.title.auto_id }}" name="{{ form.title.html_name }}" placeholder="{{ form.title.label }}">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="{{ form.description.auto_id }}" name="{{ form.description.html_name }}" placeholder="{{ form.description.label }}">
+                        </div>
+
+                    </div>
+                    <div class="panel-footer text-center">
+                        <input type="submit" value="Upload" class="btn btn-lg btn-success" />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}
