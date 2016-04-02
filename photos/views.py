@@ -5,12 +5,17 @@ from .forms import UploadForm
 from .models import Photo
 
 
-def home(request, context={}):
-    new_context = context.copy()
-    new_context.update({
-                'user': request.user,
-                })
-    return render(request, 'base.html', context=context)
+def home(request):
+    # new_context = context.copy()
+    # new_context.update({
+    #             'user': request.user,
+    #             })
+
+    photos = Photo.objects.order_by('created_at')[:10]
+
+    return render(request, 'photos/feed.html', context={
+        'photos': photos
+    })
 
 
 def upload(request):
@@ -37,6 +42,6 @@ def upload(request):
 
 
 def view(request, photo_id):
-
+    # TODO
     return render(request, 'base.html', context={})
 

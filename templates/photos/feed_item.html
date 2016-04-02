@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <a href="{% url 'photos_view' photo_id=item.id %}">
+            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="img-thumbnail" />
+        </a>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pull-left">
+                    <a href="{% url 'users_profile' user_id=item.author.id %}">
+                        <img
+                            src="https://placeholdit.imgix.net/~text?txtsize=60&txt=u&w=100&h=100"
+                            width="50"
+                            height="50"
+                            alt=""
+                            class="img-circle"
+                        />
+                    </a>
+                </div>
+                <div class="feed_photo_info">
+                    <h3 class="no-padding no-margin title">
+                        <a href="{% url 'photos_view' photo_id=item.id %}" >
+                            {{ item.title }}
+                        </a>
+                    </h3>
+
+                    <a href="{% url 'users_profile' user_id=item.author.id %}"><span class="grayish">{{ item.author.username }}</span></a>
+                    <span class="grayish">&bull;</span>
+                    <span class="grayish">{{ item.created_at }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 text-right feed_photo_health grayish">
+
+                <div class="item">
+                    <span class="glyphicon glyphicon-heart"></span> 69
+                </div>
+
+                <div class="item">
+                    <span class="glyphicon glyphicon-comment"></span> 100500
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

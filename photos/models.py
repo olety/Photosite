@@ -1,17 +1,18 @@
 from __future__ import unicode_literals
 from django.db import models
 from users.models import User
+from datetime import datetime
 import os
 import binascii
-from datetime import datetime
 
 
 def photo_upload_path(instance, filename):
     date = datetime.now()
-    return 'photos/{1}/{2}/{0}'.format(
+    return 'photos/{1}/{2}/{0}.{3}'.format(
         binascii.hexlify(os.urandom(16)),
         date.strftime('%Y'),
-        date.strftime('%m')
+        date.strftime('%m'),
+        os.path.splitext(filename)[1][1:].strip().lower()
     )
 
 

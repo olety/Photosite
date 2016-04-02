@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-9">
+
+            {% for photo in photos %}
+                {% include 'photos/feed_item.html' with item=photo %}
+            {% endfor %}
+
+        </div>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">#photooftheday</div>
+                <div class="panel-body">
+                    <img src="https://placeholdit.imgix.net/~text?txtsize=60&txt=gr8%20pic&w=320&h=240" alt="" class="img-thumbnail" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

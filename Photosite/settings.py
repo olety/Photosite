@@ -25,7 +25,7 @@ SECRET_KEY = 'mzzus-d9+bt!i77au!&-)d++a^%goyn47)()ujek955yvt4f5&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['::1']
 
 
 # Application definition
@@ -136,6 +136,7 @@ MEDIA_URL = '/uploads/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    MEDIA_ROOT,
 ]
 
 # Custom user
