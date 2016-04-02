@@ -5,6 +5,9 @@
     * `python-pip`
     * `python-virtualenv`
     * `postgresql-server-dev-X.Y` (9.3)
+    * `libjpeg-dev`
+    * `libtiff5-dev`
+    * `webp`
 2. `git clone` this project
 3. `cd Photosite`
 4. `virtualenv venv`
