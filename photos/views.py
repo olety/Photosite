@@ -9,3 +9,8 @@ def home(request, context={}):
                 'user': request.user,
                 })
     return render(request, 'base.html', context=context)
+
+
+def upload(request, context={}):
+
+    return render(request, 'base.html', context=context)

@@ -25,22 +25,43 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Photosite</a>
+                <a class="navbar-brand" href="{% url 'global_home' %}">Photosite</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 {% block menu_left %}
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                        <li class="{% if request.resolver_match.url_name == 'global_home' %}active{% endif %}">
+                            <a href="{% url 'global_home' %}"><span class="glyphicon glyphicon-home"></span> Home</a>
+                        </li>
+                        <li class="{% if request.resolver_match.url_name == 'photos_upload' %}active{% endif %}">
+                            <a href="{% url 'photos_upload' %}"><span class="glyphicon glyphicon-upload"></span> Upload</a>
+                        </li>
                     </ul>
                 {% endblock %}
                 {% block menu_right %}
                     <ul class="nav navbar-nav navbar-right">
                         {% if user.is_authenticated %}
-                            <li><a href="{% url 'users_profile' user.id %}"><span class="glyphicon glyphicon-user"></span> {{ user.username|capfirst }}</a></li>
-                            <li><a href="{% url 'users_logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                            <li>
+                                <a href="{% url 'users_profile' user.id %}">
+                                    <span class="glyphicon glyphicon-user"></span> {{ user.username|capfirst }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users_logout' %}">
+                                    <span class="glyphicon glyphicon-log-out"></span> Logout
+                                </a>
+                            </li>
                         {% else %}
-                            <li><a href="{% url 'users_register' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                            <li><a href="{% url 'users_login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li>
+                                <a href="{% url 'users_register' %}">
+                                    <span class="glyphicon glyphicon-user"></span> Sign Up
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'users_login' %}">
+                                    <span class="glyphicon glyphicon-log-in"></span> Login
+                                </a>
+                            </li>
                         {% endif %}
                     </ul>
                 {% endblock %}

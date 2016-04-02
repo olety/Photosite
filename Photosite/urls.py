@@ -22,12 +22,18 @@ from users import views as user_views
 
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
-    # PHOTOS
+
     #  /
-    url(r'^$', photo_views.home, name='photos_home'),
+    url(r'^$', photo_views.home, name='global_home'),
+
+    # PHOTOS
+    # /photo/
+    url(r'^photo/', include('photos.urls')),
+
     # USERS
     # /user/
     url(r'^user/', include('users.urls')),
+
     # /login
     url(r'^login', user_views.login, name='users_login'),
     # /logout
