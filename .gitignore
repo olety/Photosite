@@ -2,6 +2,9 @@
 #DJANGO##
 #########
 
+uploads/*
+!uploads/.gitkeep
+
 # Taken from https://github.com/django/django/blob/master/.gitignore
 
 *.egg-info

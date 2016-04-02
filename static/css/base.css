@@ -5,3 +5,40 @@ body {
 .navbar .nav > li > a {
     color:  #ddd;
 }
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.grayish {
+    color: #999;
+}
+
+.feed_photo_info {
+    cursor: default;
+    margin-left: 60px;
+}
+
+.feed_photo_info .title a {
+    color: #000;
+}
+
+.feed_photo_health {
+    cursor: default;
+    font-size: 1.5em;
+    min-height: 50px;
+}
+
+.feed_photo_health > .item {
+    display: inline-block;
+    margin-left: 0.5em;
+    margin-top: 0.5em;
+}
+
+.feed_photo_health .glyphicon-heart {
+    color: #ff0000;
+}

@@ -16,12 +16,17 @@ Including another URLconf
 from django.conf.urls import url
 from django.conf.urls import include
 from django.contrib import admin
-from django.contrib.auth import views as django_views
+from django.conf import settings
+from django.views.static import serve as django_static_serve
 from photos import views as photo_views
 from users import views as user_views
 
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
+    url(r'^uploads/(?P<path>.*)$', django_static_serve, {
+        'document_root': settings.MEDIA_ROOT,
+        'show_indexes': True
+    }),
 
     #  /
     url(r'^$', photo_views.home, name='global_home'),
