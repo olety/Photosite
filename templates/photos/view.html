@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load photo_extras %}
+
 {% block content %}
 
     <div class="row margin-bottom">
@@ -33,8 +35,26 @@
             <div class="panel panel-default">
                 <div class="panel-heading">{{ photo.title }}</div>
                 <div class="panel-body">
-                    <p class="grayish">{{ photo.created_at }}</p>
-                    {{ photo.description }}
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="grayish">{{ photo.created_at }}</p>
+                            {{ photo.description }}
+                        </div>
+                        <div class="col-md-6 text-right feed_photo_health grayish">
+
+                            <div class="item">
+                                <a href="{% url 'photos_like_toggle' photo_id=photo.id %}"><span class="glyphicon glyphicon-heart {% if photo|has_liked:user %}red-text{% endif %}"></span></a>
+                                {{ photo.like_set.count }}
+                            </div>
+
+                            <div class="item">
+                                <span class="glyphicon glyphicon-comment"></span> 100500
+                            </div>
+
+                        </div>
+                    </div>
+
                 </div>
             </div>
 

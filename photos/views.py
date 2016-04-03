@@ -50,6 +50,22 @@ def view(request, photo_id):
         raise Http404('Photo does not exist')
 
     return render(request, 'photos/view.html', context={
-        'photo': photo
+        'photo': photo,
+        'has_liked': photo.like_set.filter(user=request.user).count() > 0
     })
 
+
+def like(request, photo_id):
+    try:
+        photo = Photo.objects.get(pk=photo_id)
+    except ObjectDoesNotExist:
+        raise Http404('Photo does not exist')
+
+    the_like = photo.like_set.filter(user=request.user).first()
+
+    if the_like is not None:
+        the_like.delete()
+    else:
+        photo.like_set.create(user=request.user, photo=photo)
+
+    return HttpResponseRedirect(reverse('photos_view', args=[photo_id]))
