@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.http import Http404
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import UploadForm
 from .models import Photo
 
@@ -11,7 +13,7 @@ def home(request):
     #             'user': request.user,
     #             })
 
-    photos = Photo.objects.order_by('created_at')[:10]
+    photos = Photo.objects.order_by('-created_at')[:10]
 
     return render(request, 'photos/feed.html', context={
         'photos': photos
@@ -42,6 +44,28 @@ def upload(request):
 
 
 def view(request, photo_id):
-    # TODO
-    return render(request, 'base.html', context={})
+    try:
+        photo = Photo.objects.get(pk=photo_id)
+    except ObjectDoesNotExist:
+        raise Http404('Photo does not exist')
 
+    return render(request, 'photos/view.html', context={
+        'photo': photo,
+        'has_liked': photo.like_set.filter(user=request.user).count() > 0
+    })
+
+
+def like(request, photo_id):
+    try:
+        photo = Photo.objects.get(pk=photo_id)
+    except ObjectDoesNotExist:
+        raise Http404('Photo does not exist')
+
+    the_like = photo.like_set.filter(user=request.user).first()
+
+    if the_like is not None:
+        the_like.delete()
+    else:
+        photo.like_set.create(user=request.user, photo=photo)
+
+    return HttpResponseRedirect(reverse('photos_view', args=[photo_id]))

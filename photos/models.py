@@ -51,6 +51,33 @@ class Photo (models.Model):
     def __str__(self):
         return self.name
 
+    def has_liked(self, user):
+        return self.like_set.filter(user=user).count() > 0
+
     class Meta:
         verbose_name = 'Photo'
         verbose_name_plural = "photos"
+
+
+class Like (models.Model):
+
+    id = models.AutoField(
+        primary_key=True
+    )
+
+    photo = models.ForeignKey(
+        Photo,
+        on_delete=models.CASCADE
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    class Meta:
+        unique_together = (('photo', 'user'),)

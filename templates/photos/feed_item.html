@@ -1,3 +1,5 @@
+{% load photo_extras %}
+
 <div class="panel panel-default">
     <div class="panel-body">
         <a href="{% url 'photos_view' photo_id=item.id %}">
@@ -33,7 +35,7 @@
             <div class="col-md-6 text-right feed_photo_health grayish">
 
                 <div class="item">
-                    <span class="glyphicon glyphicon-heart"></span> 69
+                    <span class="glyphicon glyphicon-heart {% if photo|has_liked:user %}red-text{% endif %}"></span> {{ item.like_set.count }}
                 </div>
 
                 <div class="item">

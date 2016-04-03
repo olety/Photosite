@@ -6,13 +6,12 @@ body {
     color:  #ddd;
 }
 
-.no-padding {
-    padding: 0;
-}
+.no-padding { padding: 0; }
+.no-margin { margin: 0; }
 
-.no-margin {
-    margin: 0;
-}
+.margin-bottom { margin-bottom: 15px; }
+
+.red-text { color: #ff0000; }
 
 .grayish {
     color: #999;
@@ -39,6 +38,14 @@ body {
     margin-top: 0.5em;
 }
 
-.feed_photo_health .glyphicon-heart {
-    color: #ff0000;
+
+.photo_author_info a {
+    text-decoration: none;
+    color: #000;
+}
+
+.photo_author_info .name {
+    font-size: 1.25em;
+    margin-left: 0.25em;
+    vertical-align: top;
 }
