@@ -13,7 +13,7 @@ def home(request):
     #             'user': request.user,
     #             })
 
-    photos = Photo.objects.order_by('created_at')[:10]
+    photos = Photo.objects.order_by('-created_at')[:10]
 
     return render(request, 'photos/feed.html', context={
         'photos': photos
