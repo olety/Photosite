@@ -29,10 +29,10 @@ urlpatterns = [
         'document_root': settings.MEDIA_ROOT,
         'show_indexes': True
     }),
-    url(r'^static/(?P<path>.*)$', django_static_serve, {
-        'document_root': settings.STATIC_ROOT,
-        'show_indexes': True
-    }),
+    # url(r'^static/(?P<path>.*)$', django_static_serve, {
+    #     'document_root': settings.STATIC_ROOT,
+    #     'show_indexes': True
+    # }),
 
     #  /
     url(r'^$', photo_views.home, name='global_home'),
