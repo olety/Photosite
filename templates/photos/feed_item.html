@@ -35,7 +35,7 @@
             <div class="col-md-6 text-right feed_photo_health grayish">
 
                 <div class="item">
-                    <span class="glyphicon glyphicon-heart {% if photo|has_liked:user %}red-text{% endif %}"></span> {{ item.like_set.count }}
+                    <span class="glyphicon glyphicon-heart {% if user|has_liked:item %}red-text{% endif %}"></span> {{ item.like_set.count }}
                 </div>
 
                 <div class="item">
