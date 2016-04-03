@@ -21,10 +21,16 @@ from django.views.static import serve as django_static_serve
 from photos import views as photo_views
 from users import views as user_views
 
+
 urlpatterns = [
     url('^', include('django.contrib.auth.urls')),
+
     url(r'^uploads/(?P<path>.*)$', django_static_serve, {
         'document_root': settings.MEDIA_ROOT,
+        'show_indexes': True
+    }),
+    url(r'^static/(?P<path>.*)$', django_static_serve, {
+        'document_root': settings.STATIC_ROOT,
         'show_indexes': True
     }),
 

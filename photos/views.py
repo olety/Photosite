@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.http import Http404
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import UploadForm
 from .models import Photo
 
@@ -42,7 +44,11 @@ def upload(request):
 
 
 def view(request, photo_id):
-    photo = Photo.objects.get(pk=photo_id)
+    try:
+        photo = Photo.objects.get(pk=photo_id)
+    except ObjectDoesNotExist:
+        raise Http404('Photo does not exist')
+
     return render(request, 'photos/view.html', context={
         'photo': photo
     })
