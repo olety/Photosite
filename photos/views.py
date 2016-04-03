@@ -42,6 +42,8 @@ def upload(request):
 
 
 def view(request, photo_id):
-    # TODO
-    return render(request, 'base.html', context={})
+    photo = Photo.objects.get(pk=photo_id)
+    return render(request, 'photos/view.html', context={
+        'photo': photo
+    })
 
