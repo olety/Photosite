@@ -44,12 +44,18 @@
                         <div class="col-md-6 text-right feed_photo_health grayish">
 
                             <div class="item">
-                                <a href="{% url 'photos_like_toggle' photo_id=photo.id %}"><span class="glyphicon glyphicon-heart {% if user|has_liked:photo %}red-text{% else %}grayish{% endif %}"></span></a>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'photos_like_toggle' photo_id=photo.id %}">
+                                {% endif %}
+                                    <span class="glyphicon glyphicon-heart {% if user|has_liked:photo %}red-text{% else %}grayish{% endif %}"></span>
+                                {% if user.is_authenticated %}
+                                </a>
+                                {% endif %}
                                 {{ photo.like_set.count }}
                             </div>
 
                             <div class="item">
-                                <span class="glyphicon glyphicon-comment"></span> 100500
+                                <span class="glyphicon glyphicon-comment"></span> {{ photo.comment_set.count }}
                             </div>
 
                         </div>
@@ -57,6 +63,8 @@
 
                 </div>
             </div>
+
+            {% include 'photos/view_comments.html' %}
 
         </div>
     </div>
