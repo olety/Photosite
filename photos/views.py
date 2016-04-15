@@ -4,6 +4,7 @@ from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import PermissionDenied
+from django.contrib.auth.decorators import login_required
 from .forms import UploadForm
 from .models import Photo
 
@@ -21,6 +22,7 @@ def home(request):
     })
 
 
+@login_required
 def upload(request):
 
     if request.method == 'POST':
