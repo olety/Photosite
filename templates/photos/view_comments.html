@@ -1,0 +1,35 @@
+<div class="panel panel-default" id="comments">
+
+    <div class="panel-heading">
+
+        {% if messages %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form action="{% url 'photos_comment_add' photo_id=photo.id %}" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <textarea placeholder="Your comment..." class="form-control" name="content" id="content" cols="30" rows="3" style="resize:vertical"></textarea>
+            </div>
+
+            <div class="text-right">
+                <button type="submit" class="btn btn-success">Add</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="panel-body">
+        {% for comment in photo.comment_set.all %}
+
+            <p id="comment_{{ comment.id }}"><em>{{ comment.created_at }}</em> {{ comment.user.username }}: {{ comment.content }}</p>
+
+        {% endfor %}
+    </div>
+</div>

@@ -4,9 +4,11 @@ from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import PermissionDenied
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UploadForm
 from .models import Photo
+from .models import Comment
 
 
 def home(request):
@@ -74,3 +76,29 @@ def like(request, photo_id):
         photo.like_set.create(user=request.user, photo=photo)
 
     return HttpResponseRedirect(reverse('photos_view', args=[photo_id]))
+
+
+def comment_add(request, photo_id):
+    try:
+        photo = Photo.objects.get(pk=photo_id)
+    except ObjectDoesNotExist:
+        raise Http404('Photo does not exist')
+
+    if not request.user.is_authenticated():
+        raise PermissionDenied('User not logged in')
+
+    content = request.POST.get('content', '').strip()
+    url_append = '#comments'
+
+    if len(content) > 2:
+        comment = Comment(
+            photo=photo,
+            user=request.user,
+            content=content
+        )
+        comment.save()
+        url_append = '#comment_' + str(comment.id)
+    else:
+        messages.error(request, 'Comment is too short.')
+
+    return HttpResponseRedirect(reverse('photos_view', args=[photo.id]) + url_append)
