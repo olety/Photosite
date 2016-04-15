@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.http import Http404
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import PermissionDenied
 from .forms import UploadForm
 from .models import Photo
 
@@ -50,8 +51,7 @@ def view(request, photo_id):
         raise Http404('Photo does not exist')
 
     return render(request, 'photos/view.html', context={
-        'photo': photo,
-        'has_liked': photo.like_set.filter(user=request.user).count() > 0
+        'photo': photo
     })
 
 
@@ -60,6 +60,9 @@ def like(request, photo_id):
         photo = Photo.objects.get(pk=photo_id)
     except ObjectDoesNotExist:
         raise Http404('Photo does not exist')
+
+    if not request.user.is_authenticated():
+        raise PermissionDenied('User not logged in')
 
     the_like = photo.like_set.filter(user=request.user).first()
 

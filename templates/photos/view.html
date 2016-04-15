@@ -44,7 +44,13 @@
                         <div class="col-md-6 text-right feed_photo_health grayish">
 
                             <div class="item">
-                                <a href="{% url 'photos_like_toggle' photo_id=photo.id %}"><span class="glyphicon glyphicon-heart {% if user|has_liked:photo %}red-text{% else %}grayish{% endif %}"></span></a>
+                                {% if user.is_authenticated %}
+                                <a href="{% url 'photos_like_toggle' photo_id=photo.id %}">
+                                {% endif %}
+                                    <span class="glyphicon glyphicon-heart {% if user|has_liked:photo %}red-text{% else %}grayish{% endif %}"></span>
+                                {% if user.is_authenticated %}
+                                </a>
+                                {% endif %}
                                 {{ photo.like_set.count }}
                             </div>
 
