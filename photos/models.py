@@ -16,6 +16,18 @@ def photo_upload_path(instance, filename):
     )
 
 
+class Tag (models.Model):
+
+    id = models.AutoField(
+        primary_key=True
+    )
+
+    name = models.CharField(
+        max_length=100,
+        unique=True
+    )
+
+
 class Photo (models.Model):
 
     id = models.AutoField(
@@ -28,7 +40,7 @@ class Photo (models.Model):
 
     title = models.CharField(
         max_length=100,
-        default='',
+        default='Untitled',
         unique=False
     )
 
@@ -44,12 +56,14 @@ class Photo (models.Model):
         on_delete=models.CASCADE
     )
 
+    tags = models.ManyToManyField(Tag)
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )
 
     def __str__(self):
-        return self.name
+        return self.title
 
     def has_liked(self, user):
         return self.like_set.filter(user=user).count() > 0

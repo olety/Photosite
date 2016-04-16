@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UploadForm
 from .models import Photo
+from .models import Tag
 from .models import Comment
 
 
@@ -38,6 +39,17 @@ def upload(request):
                 author=request.user
             )
             photo.save()
+
+            # photo.tags
+
+            for t in form.cleaned_data['tags'].split(','):
+                t = t.strip()
+                tag, created = Tag.objects.get_or_create(name=t)
+
+                if created:
+                    tag.save()
+
+                photo.tags.add(tag)
 
             return HttpResponseRedirect(reverse('photos_view', args=[photo.id]))
     else:

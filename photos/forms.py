@@ -9,6 +9,7 @@ class UploadForm(forms.ModelForm):
     title = forms.CharField(label='Title', required=False)
     description = forms.CharField(label='Description', required=False)
     image = forms.ImageField(label='Image', required=True)
+    tags = forms.CharField(label='Tags', required=True)
 
     class Meta:
         model = Photo
