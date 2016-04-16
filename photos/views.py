@@ -32,12 +32,14 @@ def upload(request):
         form = UploadForm(request.POST, request.FILES)
 
         if form.is_valid():
-            photo = Photo(
-                title=form.cleaned_data['title'],
-                description=form.cleaned_data['description'],
-                image=form.cleaned_data['image'],
-                author=request.user
-            )
+            photo = form.save(commit=False)
+            # photo = Photo(
+            #     title=form.cleaned_data['title'],
+            #     description=form.cleaned_data['description'],
+            #     image=form.cleaned_data['image'],
+            #     author=request.user
+            # )
+            photo.author = request.user
             photo.save()
 
             # photo.tags

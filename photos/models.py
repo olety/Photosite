@@ -1,5 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
+from users.models import Camera
+from users.models import Lens
 from users.models import User
 from datetime import datetime
 import os
@@ -54,6 +56,18 @@ class Photo (models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE
+    )
+
+    camera = models.ForeignKey(
+        Camera,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+    lens = models.ForeignKey(
+        Lens,
+        null=True,
+        on_delete=models.SET_NULL
     )
 
     tags = models.ManyToManyField(Tag)
